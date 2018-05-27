@@ -1,0 +1,78 @@
+<div>
+    <h2>
+        <span>Requests</span>
+        <button class="btn btn-primary float-right jh-create-entity create-request-ts" [routerLink]="['/', { outlets: { popup: ['request-ts-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Request
+            </span>
+        </button>
+        <button type="submit"
+                [routerLink]="['/', { outlets: { popup: 'request-ts/process'} }]"
+                replaceUrl="true"
+                queryParamsHandling="merge"
+                class="btn btn-run btn-sm">
+            <span class="fa fa-remove"></span>
+            <span class="d-none d-md-inline">Process requests</span>
+        </button>
+    </h2>
+    <ts-alert></ts-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="requests">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="product"><span>Product</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="price"><span>Price</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="itemsCount"><span>Items Count</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="type"><span>Type</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="quality"><span>Quality</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="requester.login"><span>Requester</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let request of requests ;trackBy: trackId">
+                <td><a [routerLink]="['../request-ts', request.id ]">{{request.id}}</a></td>
+                <td>{{request.product}}</td>
+                <td>{{request.price}}</td>
+                <td>{{request.itemsCount}}</td>
+                <td>{{request.type}}</td>
+                <td>{{request.quality}}</td>
+                <td>
+                    {{request.requester?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../request-ts', request.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'request-ts/'+ request.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'request-ts/'+ request.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

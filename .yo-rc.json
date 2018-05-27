@@ -1,0 +1,36 @@
+{
+  "generator-jhipster": {
+    "baseName": "ts",
+    "packageName": "com.bidding",
+    "packageFolder": "com/bidding",
+    "authenticationType": "session",
+    "hibernateCache": "no",
+    "clusteredHttpSession": false,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "useCompass": false,
+    "buildTool": "maven",
+    "searchEngine": false,
+    "enableTranslation": false,
+    "applicationType": "monolith",
+    "testFrameworks": [],
+    "languages": [
+      "en"
+    ],
+    "serverPort": 8080,
+    "jhipsterVersion": "4.14.3",
+    "enableSocialSignIn": false,
+    "useSass": false,
+    "jhiPrefix": "ts",
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "clientPackageManager": "yarn",
+    "clientFramework": "angularX",
+    "enableHibernateCache": false,
+    "reactive": false,
+    "cacheProvider": "no",
+    "rememberMeKey": "2578dc5b5264a7590c658af609832acdc8d8b026"
+  }
+}

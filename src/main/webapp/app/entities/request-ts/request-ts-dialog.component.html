@@ -1,0 +1,103 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myRequestLabel">Create or edit a Request</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <ts-alert-error></ts-alert-error>
+        <div class="form-group" [hidden]="!request.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="request.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_product">Product</label>
+            <input type="text" class="form-control" name="product" id="field_product"
+                [(ngModel)]="request.product" required/>
+            <div [hidden]="!(editForm.controls.product?.dirty && editForm.controls.product?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.product?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_price">Price</label>
+            <input type="number" class="form-control" name="price" id="field_price"
+                [(ngModel)]="request.price" required/>
+            <div [hidden]="!(editForm.controls.price?.dirty && editForm.controls.price?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.price?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.price?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_itemsCount">Items Count</label>
+            <input type="number" class="form-control" name="itemsCount" id="field_itemsCount"
+                [(ngModel)]="request.itemsCount" required/>
+            <div [hidden]="!(editForm.controls.itemsCount?.dirty && editForm.controls.itemsCount?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.itemsCount?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.itemsCount?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_type">Type</label>
+            <input type="number" class="form-control" name="type" id="field_type"
+                [(ngModel)]="request.type" required/>
+            <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.type?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.type?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_quality">Quality</label>
+            <input type="number" class="form-control" name="quality" id="field_quality"
+                [(ngModel)]="request.quality" required/>
+            <div [hidden]="!(editForm.controls.quality?.dirty && editForm.controls.quality?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.quality?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.quality?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_requester">Requester</label>
+            <select class="form-control" id="field_requester" name="requester" [(ngModel)]="request.requester" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userOption.id === request.requester?.id ? request.requester : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
